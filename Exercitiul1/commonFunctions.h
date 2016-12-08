@@ -75,7 +75,7 @@ unsigned char *aes_decrypt_ecb(unsigned char *ciphertext, int *len, unsigned cha
 
 char *padara_cuvant(char buffer[]) {
     int i = strlen(buffer);
-    char *cheie = (char *) malloc(17);
+    char *cheie = (char *) malloc(50);
     strcpy(cheie, buffer);
     for (; i < 16; i++) {
         strcat(cheie, "\x20");

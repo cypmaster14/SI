@@ -7,13 +7,15 @@
 #include <stdlib.h>
 #include "commonFunctions.h"
 
-int main() {
+int main(int argc, char *argv[]) {
 
     char *plainText = read_content("pt.txt");
     char *cipherText = read_content("ct.txt");
-    char *optiune = (char *) malloc(10);
-    printf("Mod:");
-    scanf("%s", optiune);
+//    char *optiune = (char *) malloc(10);
+//    printf("Mod:");
+//    scanf("%s", optiune);
+
+    char *optiune = argv[1];
 
     if (strcmp(optiune, "ECB") != 0 && strcmp(optiune, "CBC") != 0) {
         perror("Modul introdus nu este unul valid");
@@ -31,10 +33,11 @@ int main() {
     char *possibleKey = NULL;
     size_t possibleKeyLength = 0;
     size_t read;
+    int i = 0;
 
     while ((read = getline(&possibleKey, &possibleKeyLength, dictionary)) != -1) {
         removeNewLine(possibleKey);
-        printf("Key size:%d(%s)\n", (int) strlen(possibleKey), possibleKey);
+//        printf("Key size:%d(%s)\n", (int) strlen(possibleKey), possibleKey);
         possibleKey = padara_cuvant(possibleKey);
         unsigned char *possibleCipherText;
         int plainTextLength = strlen(plainText);
@@ -48,10 +51,9 @@ int main() {
         }
 
         if (strcmp((const char *) possibleCipherText, cipherText) == 0) {
-            printf("Cheia a fost gasita:%s", possibleKey);
+            printf("Cheia a fost gasita:%s\n", possibleKey);
             exit(0);
         }
-
     }
 
     fclose(dictionary);
