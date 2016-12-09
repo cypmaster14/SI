@@ -16,7 +16,10 @@ unsigned char iv[] = "\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x
 
 
 unsigned char *aes_encrypt_cbc(unsigned char *plaintext, int *len, unsigned char *key_data) {
-
+    /*
+     *  Function that returns the encrypted plaintext using CBC mode
+     *  For encryption was used key_data
+     */
     EVP_CIPHER_CTX *e = EVP_CIPHER_CTX_new();
     EVP_EncryptInit_ex(e, EVP_aes_128_cbc(), NULL, key_data, iv);
     int c_len = *len + 128;
@@ -32,7 +35,10 @@ unsigned char *aes_encrypt_cbc(unsigned char *plaintext, int *len, unsigned char
 
 
 unsigned char *aes_encrypt_ecb(unsigned char *plaintext, int *len, unsigned char *key_data) {
-
+    /*
+    *  Function that returns the encrypted plaintext using ECB mode
+    *  For encryption was used key_data
+    */
     EVP_CIPHER_CTX *e = EVP_CIPHER_CTX_new();
     EVP_EncryptInit_ex(e, EVP_aes_128_ecb(), NULL, key_data, NULL);
     int c_len = *len + 128;
@@ -47,7 +53,10 @@ unsigned char *aes_encrypt_ecb(unsigned char *plaintext, int *len, unsigned char
 }
 
 unsigned char *aes_decrypt_cbc(unsigned char *ciphertext, int *len, unsigned char *key_data) {
-    /* plaintext will always be equal to or lesser than length of ciphertext*/
+    /*
+     *  Function that returns the decrypted ciphertext using CBC mode
+     *  For decryption was used key_data
+     */
     EVP_CIPHER_CTX *e = EVP_CIPHER_CTX_new();
     EVP_DecryptInit_ex(e, EVP_aes_128_cbc(), NULL, key_data, iv);
     int p_len = *len, f_len = 0;
@@ -60,7 +69,10 @@ unsigned char *aes_decrypt_cbc(unsigned char *ciphertext, int *len, unsigned cha
 }
 
 unsigned char *aes_decrypt_ecb(unsigned char *ciphertext, int *len, unsigned char *key_data) {
-    /* plaintext will always be equal to or lesser than length of ciphertext*/
+    /*
+     *  Function that returns the decrypted ciphertext using ECB mode
+     *  For decryption was used key_data
+     */
     EVP_CIPHER_CTX *e = EVP_CIPHER_CTX_new();
     EVP_DecryptInit_ex(e, EVP_aes_128_ecb(), NULL, key_data, iv);
     int p_len = *len, f_len = 0;
@@ -73,19 +85,24 @@ unsigned char *aes_decrypt_ecb(unsigned char *ciphertext, int *len, unsigned cha
 }
 
 
-char *padara_cuvant(char buffer[]) {
+char *word_padding(char *buffer) {
+    /*
+     * Function that return the word padded only if it is necessary (size <16)
+     */
     int i = strlen(buffer);
-    char *cheie = (char *) malloc(50);
-    strcpy(cheie, buffer);
+    char *key = (char *) malloc(50);
+    strcpy(key, buffer);
     for (; i < 16; i++) {
-        strcat(cheie, "\x20");
+        strcat(key, "\x20");
     }
-    cheie[i] = '\0';
-    return cheie;
+    key[i] = '\0';
+    return key;
 }
 
 char *read_content(const char *filename) {
-
+    /*
+     * Function that returns all the content of the file
+     */
     FILE *f = fopen(filename, "r");
     fseek(f, 0, SEEK_END);
     long fsize = ftell(f);
@@ -99,6 +116,9 @@ char *read_content(const char *filename) {
 }
 
 void removeNewLine(char *word) {
+    /*
+     * Fuction that removes the new line character if exists
+     */
     if (word[strlen(word) - 1] == '\n') {
         word[strlen(word) - 1] = '\0';
     }

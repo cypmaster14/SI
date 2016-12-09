@@ -1,3 +1,5 @@
+#!/bin/bash
+
 gcc -I /usr/local/ssl/include/ -L /usr/local/ssl/lib -o aux.exe aux.cpp -lcrypto -ldl
 gcc -I /usr/local/ssl/include/ -L /usr/local/ssl/lib -o generate_cipher.exe generate_cipher.cpp -lcrypto  -ldl
 
@@ -7,15 +9,15 @@ do
    if [ $((i%2)) -eq 0 ];
    then
       mod="ECB"
-      echo "If ECB"
    else
-      echo "IF CBC"
       mod="CBC"   
    fi
-	
-  ./generate_cipher.exe $mod $((1+RANDOM%100))
-  ./aux.exe $mod
-  echo $((1+RANDOM%100))
+
+
+  lines=$(wc -l wordDict.txt | cut -f1 -d' ' | tr -d '[:space:]')
+  ./generate_cipher.exe $mod $((1+RANDOM%lines)) "pt.txt" "ct.txt"
+  ./aux.exe $mod "pt.txt" "ct.txt"
   #sleep 2s
+  echo
 
 done

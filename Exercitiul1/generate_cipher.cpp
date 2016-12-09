@@ -12,12 +12,9 @@
 
 int main(int argc, char *argv[]) {
 
-    char *plainText = read_content("pt.txt");
-    int plainTextLen = strlen(plainText);
-//    char *optiune = (char *) malloc(10);
-//    printf("Mod:");
-//    scanf("%s", optiune);
     char *optiune = argv[1];
+    char *plainText = read_content(argv[3]);
+    int plainTextLen = strlen(plainText);
 
     if (strcmp(optiune, "ECB") != 0 && strcmp(optiune, "CBC") != 0) {
         perror("Modul introdus nu este unul valid");
@@ -26,21 +23,24 @@ int main(int argc, char *argv[]) {
 
     unsigned char *key_data;
     int key_number = atoi(argv[2]);
-    printf("Cheie:%d", key_number);
+    printf("Indice Cheie:%d\n", key_number);
 
     FILE *dictionary = fopen("wordDict.txt", "r");
 
     char *word = NULL;
     size_t wordLen = 0;
+
+    //I read the N-th key from dictionary (N is the random number
     for (int i = 0; i < key_number; i++) {
         getline(&word, &wordLen, dictionary);
     }
     fclose(dictionary);
 
+    //getline() -> returns an entire line and it reads even the \n character if exists
     removeNewLine(word);
 
-    key_data = (unsigned char *) padara_cuvant(word);
-    printf("Cheie%s:", key_data);
+    key_data = (unsigned char *) word_padding(word);
+    printf("Cheie:%s", key_data);
     unsigned char *cipherText;
 
     if (strcmp(optiune, "ECB") == 0) {
@@ -49,7 +49,8 @@ int main(int argc, char *argv[]) {
         cipherText = aes_encrypt_cbc((unsigned char *) plainText, &plainTextLen, key_data);
     }
 
-    FILE *ciphetTextFile = fopen("ct.txt", "w");
+    //I write the cipherText into cipherTextFile
+    FILE *ciphetTextFile = fopen(argv[4], "w");
     fprintf(ciphetTextFile, "%s", (const char *) cipherText);
     fclose(ciphetTextFile);
     printf("\n");

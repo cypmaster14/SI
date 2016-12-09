@@ -8,3 +8,4 @@ def decrypt_encryption_key(encryption_key, key):
     decryptor = cipher.decryptor()
     decrypted_text = decryptor.update(encryption_key) + decryptor.finalize()
     return decrypted_text
+

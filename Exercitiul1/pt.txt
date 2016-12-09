@@ -1,1 +1,4 @@
 This page walks you through the basics of performing a simple encryption and corresponding decryption operation
+As they have already indicated to you, you should use 'backticks'.
+
+The alternative proposed $(command) works as well, and it also easier to read, but note that it is valid only with bash or korn shells (and shells derived from those), so if your scripts have to be really portable on various Unix systems, you should prefer the old backticks notation.

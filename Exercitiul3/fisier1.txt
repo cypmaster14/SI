@@ -1,0 +1,3 @@
+As Aerosmith sang many years ago, “Code looks like a Chain.” No? They didn't say that? Maybe I'm remembering it wrong. Well, as you might have guessed, in this post, we'll talk about the Chain of Responsibility design pattern.
+This pattern is not one of the more popular ones, at least among the patterns defined by the Gang of Four,
+but modern dependency injection frameworks give us the possibility to implement it in a smart, and fresh way. Let’s see how.

@@ -6,10 +6,10 @@ from os import urandom
 
 def encrypt_message(file_content: list, key, mode: str) -> list:
     """
-
-    :param file_content:The file that I want to encrypt split in blocks
+        Function that returns a list of encrypted blocks
+    :param file_content:The file that I want to encrypt splited in blocks
     :param mode:Cipher operation mode
-    :param key: Enryption key that it will be use
+    :param key: Encryption key that it will be use
     :return: List of encrypted block
     """
     print("Mode:", mode, len(mode))
@@ -17,11 +17,12 @@ def encrypt_message(file_content: list, key, mode: str) -> list:
         return encrypt_message_ECB(file_content, key)
     else:
         iv = urandom(16)
-        return encrypt_message_CBC(file_content, key, iv)
+        return encrypt_message_CFB(file_content, key, iv)
 
 
-def encrypt_message_ECB(text: list, key):
+def encrypt_message_ECB(text: list, key) -> list:
     """
+        Function that encrypts the block in ECB mode
     :param text: List of block i want to encrypt and send
     :param key: Key used for encryption
     :return: List of encrypted blocks
@@ -48,10 +49,10 @@ def encrypt_message_ECB(text: list, key):
 
 def decrypt_message_ECB_mode(encrypted_text: list, key):
     """
-
+        Function that decrypts the blocks that were encrypted using ECB mode
     :param encrypted_text: List of block I want to decrypt
     :param key:  Key used for decryption
-    :return:
+    :return: List of decrypted blocks
     """
 
     backend = default_backend()
@@ -75,11 +76,12 @@ def decrypt_message_ECB_mode(encrypted_text: list, key):
 
 
 def sxor(s1, s2):
-    # convert strings to a list of character pair tuples
-    # go through each tuple, converting them to ASCII code (ord)
-    # perform exclusive or on the ASCII code
-    # then convert the result back to ASCII (chr)
-    # merge the resulting array of characters as a string
+    """
+        Function that returns the result of xor
+    :param s1: First value
+    :param s2: Second value
+    :return: s1 ^ s1
+    """
 
     xor_message = bytes('', encoding="utf-8")
     for i in range(0, len(s1)):
@@ -92,13 +94,13 @@ def sxor(s1, s2):
     return xor_message
 
 
-def encrypt_message_CBC(text: list, key, iv):
+def encrypt_message_CFB(text: list, key, iv):
     """
-
+        Function that encrypts the block in CFB mode
     :param text: List of blocks I want to encrypt and send
     :param key: Key used for encryption
     :param iv: Initialization Vector
-    :return:
+    :return: List of encrypted blocks
     """
 
     encrypted_blocks = list()
@@ -123,10 +125,10 @@ def encrypt_message_CBC(text: list, key, iv):
 
 def decrypt_message_CFB_node(encrypted_text: list, key):
     """
-
+        Function that decrypts the blocks that were encrypted using CFB mode
     :param encrypted_text: List of encrypted texts
     :param key: The key which i use to decrypt each block
-    :return:
+    :return: List of decrypted blocks
     """
 
     plain_text_block = list()
@@ -151,6 +153,11 @@ def decrypt_message_CFB_node(encrypted_text: list, key):
 
 
 def print_message(messages: list):
+    """
+        Function that prints all the blocks
+    :param messages: Message I want to print
+    :return: None
+    """
     original_message = ""
     for message in messages:
         original_message += message.decode("UTF-8")
