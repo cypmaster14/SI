@@ -70,8 +70,8 @@ int getNumberOfSimilarBytes(string h1, string h2) {
      *
      */
     int identicalBytes = 0;
-    for (int i = 0; i < h1.length(); i++) {
-        if (h1[i] == h2[i]) {
+    for (int i = 0; i < h1.length(); i = i + 2) {
+        if (h1[i] == h2[i] && h1[i + 1] == h2[i + 1]) {
             identicalBytes++;
         }
     }
