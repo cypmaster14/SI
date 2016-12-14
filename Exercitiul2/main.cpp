@@ -4,12 +4,12 @@
 #include <fstream>
 #include <iostream>
 #include "functions.h"
+
 using namespace std;
 
 string f1_content;
 string f2_content;
 string h1_sha256Content, h2_sha256Content, h1_md5, h2_md5;
-
 
 
 int main(int argc, char *argv[]) {
