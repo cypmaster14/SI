@@ -1,0 +1,22 @@
+Statistici
+
+
+There are many other formatting options avilable which can be used based on requirements
+There are many other formatting options available which can be used based on requirements
+SHA256:0 caractere identice
+MD5:0 caractere identice
+
+Lorem ipsum dolor sit amet, consectetur adipiscing sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+SHA256:0 elemente comune
+MD5:0 element comun
+
+Lorm
+Lorme
+SHA256:0 elemente comune
+MD5: 0 elemente comune
+
+Lo
+Lp
+SHA256:0 elemente comune
+MD5: 0 elemente comune

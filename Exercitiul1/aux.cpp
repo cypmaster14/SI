@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
         exit(-1);
     }
 
-    printf("%s\n", plainText);
+    printf("PlainText:\n%s\n", plainText);
 
     FILE *dictionary = fopen("wordDict.txt", "r");
     if (dictionary == NULL) {
@@ -47,7 +47,7 @@ int main(int argc, char *argv[]) {
         }
 
         if (strcmp((const char *) possibleCipherText, cipherText) == 0) {
-            printf("Cheia a fost gasita:%s\n", possibleKey);
+            printf("\nCheia a fost gasita:%s\n", possibleKey);
             exit(0);
         }
     }
